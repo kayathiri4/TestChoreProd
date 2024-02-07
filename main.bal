@@ -19,7 +19,7 @@ service asgardeo:NotificationService on webhookListener {
 
       //read required data from the event.
       asgardeo:SmsOtpNotificationData? eventData = event.eventData;
-      string toNumber = "+94763960868";
+      string toNumber = <string> check eventData.toJson().sendTo;
       string message = <string> check eventData.toJson().messageBody;
 
       string response = check sendSmsClient -> sendSms(toNumber, message);
